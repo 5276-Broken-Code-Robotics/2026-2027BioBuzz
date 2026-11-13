@@ -1,5 +1,5 @@
 
-package org.firstinspires.ftc.teamcode.mechanisms;
+/*package org.firstinspires.ftc.teamcode.mechanisms;
 
 import static java.lang.Math.PI;
 
@@ -333,7 +333,7 @@ public class PanTracking{
 
          */
 
-
+/*
         telemetry.addData("According to pantracking we are at : ", pinpoint.getPosX(DistanceUnit.INCH) + " " + pinpoint.getPosY(DistanceUnit.INCH) + " At an angle of " +pinpoint.getHeading(AngleUnit.RADIANS));
 
 
@@ -364,3 +364,4 @@ public class PanTracking{
 
 
 }
+*/
