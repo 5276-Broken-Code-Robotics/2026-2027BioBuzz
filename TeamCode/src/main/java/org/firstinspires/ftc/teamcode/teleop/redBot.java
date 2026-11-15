@@ -151,6 +151,8 @@ public class redBot extends  OpMode{
         @Override
         public void start(){
 
+
+            //CHANGE THIS
             pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,144-96, 8.5, AngleUnit.RADIANS,Math.PI));
 
             intake.setPower(1);
@@ -190,8 +192,8 @@ public class redBot extends  OpMode{
                 br.setPower(0.0);
                 bl.setPower(0.0);
             }else{
-                fieldDrive.driveFieldRelative(-1*-gamepad1.left_stick_y, -1 * gamepad1.left_stick_x, gamepad1.right_stick_x);
-                if(gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0)fieldDrive.driveFieldRelative(-1 * -gamepad2.left_stick_y/4, -1 * gamepad2.left_stick_x/4,  gamepad2.right_stick_x/4);
+                fieldDrive.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+                if(gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0)fieldDrive.driveFieldRelative( -gamepad2.left_stick_y/4,   gamepad2.left_stick_x/4,  gamepad2.right_stick_x/4);
 
             }
 
