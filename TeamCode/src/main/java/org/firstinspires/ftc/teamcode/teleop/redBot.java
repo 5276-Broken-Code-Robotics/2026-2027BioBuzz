@@ -6,6 +6,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -15,6 +16,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.mechanisms.FieldRelativeDrive;
 import org.firstinspires.ftc.teamcode.mechanisms.PanTracking;
+
+
+
 
 @TeleOp(group = "TeleOp")
 
@@ -68,7 +72,7 @@ public class redBot extends  OpMode{
         ElapsedTime rewindTimer;
 
         GoBildaPinpointDriver pinpoint;
-
+        DcMotor flywheel;
 
 
         Limelight3A limelight;
@@ -78,6 +82,7 @@ public class redBot extends  OpMode{
 
         int num = 0;
         public void init() {
+
             panTracking = new PanTracking();
 
             rewindTimer = new ElapsedTime();
@@ -108,7 +113,7 @@ public class redBot extends  OpMode{
 
             intake = hardwareMap.get(DcMotor.class, "intake");
 
-
+            flywheel = hardwareMap.get(DcMotor.class, "flywheel");
             limelight = hardwareMap.get(Limelight3A.class,"limelight");
             pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
 
@@ -129,6 +134,7 @@ public class redBot extends  OpMode{
             timer.reset();
             elapsedTime = new ElapsedTime();
 
+            flywheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             elapsedTime.reset();
 
 
