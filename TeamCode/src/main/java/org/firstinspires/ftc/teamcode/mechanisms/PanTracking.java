@@ -77,25 +77,22 @@ public class PanTracking{
 
     int id;
     Telemetry telemetry;
-    public void init(HardwareMap hardwareMap, GoBildaPinpointDriver pinpoint, Telemetry telemetry, Limelight3A limelight3A, int id, Pose2D goalPos){
+
+    boolean isRed;
+    public void init(HardwareMap hardwareMap, GoBildaPinpointDriver pinpoint, Telemetry telemetry, Limelight3A limelight3A, boolean isRed){
         pan = hardwareMap.get(DcMotorEx.class, "rot");
         pan.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.pinpoint = pinpoint;
         this.telemetry = telemetry;
         this.limelight3A = limelight3A;
 
-
+        this.isRed = isRed;
         autoPausing = false;
 
         autoPausingTimer = new ElapsedTime();
-        this.id = id;
-
         spinCD = new ElapsedTime();
 
         spinCD.reset();
-
-        this.goalPos = goalPos;
-
 
     }
 
@@ -148,8 +145,19 @@ public class PanTracking{
         }
        */
 
-
-
+        if(isRed){
+            if(pinpoint.getPosition().getY(DistanceUnit.INCH) >= 144/2){
+                goalPos = redTop;
+            }else{
+                goalPos = redBot;
+            }
+        }else{
+            if(pinpoint.getPosition().getY(DistanceUnit.INCH) >= 144/2){
+                goalPos = blueTop;
+            }else{
+                goalPos = blueBot;
+            }
+        }
 
         double angleToAprilTag = Math.atan2((goalPos.getY(DistanceUnit.INCH) - pinpoint.getPosY(DistanceUnit.INCH)),(goalPos.getX(DistanceUnit.INCH) - pinpoint.getPosX(DistanceUnit.INCH)));
 

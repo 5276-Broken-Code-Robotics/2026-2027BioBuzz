@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
-import com.pedropathing.Pose;
+import com.pedropathing.math.Pose;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -14,16 +14,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.mechanisms.FieldRelativeDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.PanTracking;
 
 @TeleOp(group = "TeleOp")
 
-public class redBot {
+public class redBot extends  OpMode{
 
 
 
 
 
-        boolean beganshot = false;
 
         double initpos = 0f;
 
@@ -36,7 +36,7 @@ public class redBot {
 
 
 
-
+        PanTracking panTracking;
         FieldRelativeDrive fieldDrive;
         ElapsedTime elapsedTime;
 
@@ -64,14 +64,12 @@ public class redBot {
         Pose aprilTagRed = new Pose(144,144 + 15);
         Pose aprilTagBlue = new Pose(0,144 + 15);
 
-        HoodedShooter hShooter;
 
         ElapsedTime rewindTimer;
 
         GoBildaPinpointDriver pinpoint;
 
 
-        Servo arm1;
 
         Limelight3A limelight;
         boolean rewinding = false;
@@ -80,6 +78,7 @@ public class redBot {
 
         int num = 0;
         public void init() {
+            panTracking = new PanTracking();
 
             rewindTimer = new ElapsedTime();
             rewindTimer.reset();
@@ -107,7 +106,6 @@ public class redBot {
             br = hardwareMap.get(DcMotor.class, "br");
 
 
-            arm1 = hardwareMap.get(Servo.class, "arm1");
             intake = hardwareMap.get(DcMotor.class, "intake");
 
 
@@ -129,12 +127,10 @@ public class redBot {
 
 
             timer.reset();
-            beganshot = false;
             elapsedTime = new ElapsedTime();
 
             elapsedTime.reset();
 
-            hShooter = new HoodedShooter();
 
 
             fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -143,13 +139,12 @@ public class redBot {
             bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-            hShooter.init(hardwareMap,telemetry, pinpoint, 20);
 
             state=  0;
             intake.setPower(0);
 
             fieldDrive.init(hardwareMap, gamepad1, pinpoint);
-
+            panTracking.init(hardwareMap,pinpoint,telemetry,limelight,true);
 
         }
 
@@ -158,7 +153,6 @@ public class redBot {
 
             pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,144-96, 8.5, AngleUnit.RADIANS,Math.PI));
 
-            hShooter.start();
             intake.setPower(1);
 
 
@@ -186,31 +180,7 @@ public class redBot {
                 pinpoint.setHeading(0,AngleUnit.RADIANS);
             }
 
-            if(gamepad2.rightBumperWasPressed()){
-                hShooter.FireColor('g');
-            }
 
-            if(gamepad2.dpadDownWasPressed()){
-
-                telemetry.addData("We are on square", "hooray");
-                hShooter.Fire(1);
-            }
-            if(gamepad2.dpadRightWasPressed()){
-
-                telemetry.addData("We are on circle", "Wow");
-                hShooter.Fire(2);
-            }
-
-            if(gamepad2.dpadLeftWasPressed()){
-
-                telemetry.addData("We are on triangle", "Wow");
-                hShooter.Fire(3);
-            }
-
-
-            if(gamepad2.right_trigger > 0  && !hShooter.firingPat){
-                hShooter.firePattern();
-            }
 
 
 
@@ -231,12 +201,6 @@ public class redBot {
 
 
 
-            if(gamepad2.dpadUpWasPressed()){
-
-                hShooter.firePattern();
-            }
-
-            hShooter.loop();
 
 
 
@@ -246,7 +210,6 @@ public class redBot {
             telemetry.addData("According to redslave 1 we are at : ", pinpoint.getPosX(DistanceUnit.INCH) + " " + pinpoint.getPosY(DistanceUnit.INCH) + " At an angle of " +pinpoint.getHeading(AngleUnit.RADIANS));
             //telemetry.update();
 
-            telemetry.addData("Positions : ", hShooter.p1 + " , " + hShooter.p2 + " , " + hShooter.p3);
 
             telemetry.addData("Angle of Field driver :" , fieldDrive.AngleFacing);
             telemetry.update();
