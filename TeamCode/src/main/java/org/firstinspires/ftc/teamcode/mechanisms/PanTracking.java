@@ -1,5 +1,5 @@
 
-/*package org.firstinspires.ftc.teamcode.mechanisms;
+package org.firstinspires.ftc.teamcode.mechanisms;
 
 import static java.lang.Math.PI;
 
@@ -46,7 +46,11 @@ public class PanTracking{
     Pose2D goalPos;
 
 
-
+    // make sure to change values so that the coordinates are where the goals actually are (when they are oriented upwards). These are placeholders.
+    Pose2D redBot = new Pose2D(DistanceUnit.INCH,57,51,AngleUnit.RADIANS,0);
+    Pose2D redTop = new Pose2D(DistanceUnit.INCH,57,51,AngleUnit.RADIANS,0);
+    Pose2D blueBot = new Pose2D(DistanceUnit.INCH,57,51,AngleUnit.RADIANS,0);
+    Pose2D blueTop = new Pose2D(DistanceUnit.INCH,57,51,AngleUnit.RADIANS,0);
     float panZero = -410;
 
     float panForward = 0;
@@ -112,7 +116,7 @@ public class PanTracking{
     int pos = 0;
     public void loop(){
 
-        
+        /*
         YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
         limelight3A.updateRobotOrientation(orientation.getYaw(AngleUnit.DEGREES));
         LLResult result = limelight3A.getLatestResult();
@@ -142,6 +146,9 @@ public class PanTracking{
         for(int i =0; i < results.size(); i ++ ){
             telemetry.addLine("ID" + i + results.get(i).getFiducialId());
         }
+       */
+
+
 
 
         double angleToAprilTag = Math.atan2((goalPos.getY(DistanceUnit.INCH) - pinpoint.getPosY(DistanceUnit.INCH)),(goalPos.getX(DistanceUnit.INCH) - pinpoint.getPosX(DistanceUnit.INCH)));
@@ -160,7 +167,7 @@ public class PanTracking{
         }
 
 
-        double targetTicks = -  tAngle * (panMax-panZero)/(Math.PI);
+        double targetTicks = -   tAngle* (panMax-panZero)/(Math.PI);
 
 
 
@@ -169,6 +176,7 @@ public class PanTracking{
 
         if(Math.abs(angleToAprilTag) * 180 / PI < 30 || pinpoint.getPosY(DistanceUnit.INCH) <= 48){
 
+            //localization : Seeing where you are on the field
             telemetry.addData("Using Limelight Data : ",  "Now");
 
             boolean foundOne = false;
@@ -288,7 +296,7 @@ public class PanTracking{
 
         }
 
-
+    */
 
 
 
@@ -331,9 +339,9 @@ public class PanTracking{
             }
         }
 
-         */
 
-/*
+
+
         telemetry.addData("According to pantracking we are at : ", pinpoint.getPosX(DistanceUnit.INCH) + " " + pinpoint.getPosY(DistanceUnit.INCH) + " At an angle of " +pinpoint.getHeading(AngleUnit.RADIANS));
 
 
@@ -364,4 +372,3 @@ public class PanTracking{
 
 
 }
-*/
