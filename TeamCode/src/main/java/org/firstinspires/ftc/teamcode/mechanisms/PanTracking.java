@@ -81,7 +81,7 @@ public class PanTracking{
     boolean isRed;
     public void init(HardwareMap hardwareMap, GoBildaPinpointDriver pinpoint, Telemetry telemetry, Limelight3A limelight3A, boolean isRed){
         pan = hardwareMap.get(DcMotorEx.class, "rot");
-        pan.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //pan.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.pinpoint = pinpoint;
         this.telemetry = telemetry;
         this.limelight3A = limelight3A;

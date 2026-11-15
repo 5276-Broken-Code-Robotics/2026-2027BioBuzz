@@ -153,7 +153,8 @@ public class redBot extends  OpMode{
 
 
             //CHANGE THIS
-            pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,144-96, 8.5, AngleUnit.RADIANS,Math.PI));
+
+            //pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,144-96, 8.5, AngleUnit.RADIANS,Math.PI));
 
             intake.setPower(1);
 
