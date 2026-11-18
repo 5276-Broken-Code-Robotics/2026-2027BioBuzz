@@ -47,10 +47,10 @@ public class PanTracking{
 
 
     // make sure to change values so that the coordinates are where the goals actually are (when they are oriented upwards). These are placeholders.
-    Pose2D redBot = new Pose2D(DistanceUnit.INCH,57,51,AngleUnit.RADIANS,0);
-    Pose2D redTop = new Pose2D(DistanceUnit.INCH,57,51,AngleUnit.RADIANS,0);
-    Pose2D blueBot = new Pose2D(DistanceUnit.INCH,57,51,AngleUnit.RADIANS,0);
-    Pose2D blueTop = new Pose2D(DistanceUnit.INCH,57,51,AngleUnit.RADIANS,0);
+    Pose2D redBot = new Pose2D(DistanceUnit.INCH,57.378,51.106,AngleUnit.RADIANS,0);
+    Pose2D redTop = new Pose2D(DistanceUnit.INCH,57.378,92.894,AngleUnit.RADIANS,0);
+    Pose2D blueBot = new Pose2D(DistanceUnit.INCH,86.622,51.106,AngleUnit.RADIANS,0);
+    Pose2D blueTop = new Pose2D(DistanceUnit.INCH,86.622,92.894,AngleUnit.RADIANS,0);
     float panZero = -410;
 
     float panForward = 0;

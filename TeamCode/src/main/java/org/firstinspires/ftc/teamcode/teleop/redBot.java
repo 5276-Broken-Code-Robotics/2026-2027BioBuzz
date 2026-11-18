@@ -65,8 +65,8 @@ public class redBot extends  OpMode{
 
 
 
-        Pose aprilTagRed = new Pose(144,144 + 15);
-        Pose aprilTagBlue = new Pose(0,144 + 15);
+        //Pose aprilTagRed = new Pose(144,144 + 15);
+        //Pose aprilTagBlue = new Pose(0,144 + 15);
 
 
         ElapsedTime rewindTimer;
@@ -216,7 +216,7 @@ public class redBot extends  OpMode{
             telemetry.addData("Angle : ", pinpoint.getHeading(AngleUnit.DEGREES));
 
 
-            telemetry.addData("According to redslave 1 we are at : ", pinpoint.getPosX(DistanceUnit.INCH) + " " + pinpoint.getPosY(DistanceUnit.INCH) + " At an angle of " +pinpoint.getHeading(AngleUnit.RADIANS));
+            telemetry.addData("Corrdinates: ", pinpoint.getPosX(DistanceUnit.INCH) + " " + pinpoint.getPosY(DistanceUnit.INCH) + " At an angle of " +pinpoint.getHeading(AngleUnit.RADIANS));
             //telemetry.update();
 
 
