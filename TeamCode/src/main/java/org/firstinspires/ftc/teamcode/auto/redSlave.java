@@ -5,7 +5,9 @@ import com.pedropathing.follower.Follower;
 import static com.pedropathing.api.Paths.line;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
-
+import com.pedropathing.ivy.Scheduler;
+import static com.pedropathing.ivy.Scheduler.schedule;
+import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -18,7 +20,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
-import org.firstinspires.ftc.teamcode.pedro;
+
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 
@@ -80,7 +82,7 @@ public class redSlave extends OpMode {
                 //}else{
                   //  tweaking = true;
                 //}\
-                follower.followPath(scorePreload);
+                follower.(scorePreload);
                 setPathState(-1);
                 break;
         }

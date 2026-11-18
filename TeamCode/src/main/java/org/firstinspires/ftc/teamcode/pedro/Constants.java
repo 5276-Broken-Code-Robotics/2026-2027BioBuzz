@@ -5,13 +5,7 @@ import com.pedropathing.algorithm.Foresight;
 import com.pedropathing.algorithm.ForesightConfig;
 import com.pedropathing.controllers.Controller;
 import com.pedropathing.follower.Follower;
-import com.pedropathing.follower.FollowerConstants;
-import com.pedropathing.ftc.FollowerBuilder;
-import com.pedropathing.ftc.drivetrains.MecanumConstants;
-import com.pedropathing.ftc.localization.Encoder;
-import com.pedropathing.ftc.localization.constants.DriveEncoderConstants;
-import com.pedropathing.ftc.localization.constants.PinpointConstants;
-import com.pedropathing.ftc.localization.constants.TwoWheelConstants;
+
 import com.pedropathing.math.Matrix;
 import com.pedropathing.math.Vector2D;
 import com.pedropathing.paths.*;
@@ -123,5 +117,5 @@ public class Constants {
         );
     }
     }
-}
+
 
