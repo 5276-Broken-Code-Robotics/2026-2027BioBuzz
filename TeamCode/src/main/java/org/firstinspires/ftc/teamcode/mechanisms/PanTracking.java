@@ -65,7 +65,7 @@ public class PanTracking{
     public boolean resettingpan = false;
 
 
-    Limelight3A limelight3A;
+    //Limelight3A limelight3A;
 
 
 
@@ -79,12 +79,13 @@ public class PanTracking{
     Telemetry telemetry;
 
     boolean isRed;
-    public void init(HardwareMap hardwareMap, GoBildaPinpointDriver pinpoint, Telemetry telemetry, Limelight3A limelight3A, boolean isRed){
+    //getting rid of limelight for now because its cookeed
+    public void init(HardwareMap hardwareMap, GoBildaPinpointDriver pinpoint, Telemetry telemetry, boolean isRed){
         pan = hardwareMap.get(DcMotorEx.class, "rot");
         //pan.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.pinpoint = pinpoint;
         this.telemetry = telemetry;
-        this.limelight3A = limelight3A;
+        //this.limelight3A = limelight3A;
 
         this.isRed = isRed;
         autoPausing = false;
@@ -329,9 +330,9 @@ public class PanTracking{
 
 
 
-        List<LLResultTypes.FiducialResult> Atagresults = limelight3A.getLatestResult().getFiducialResults();
+        //List<LLResultTypes.FiducialResult> Atagresults = limelight3A.getLatestResult().getFiducialResults();
 
-        for(int i =0; i < Atagresults.size();i++){
+        /*for(int i =0; i < Atagresults.size();i++){
             if(Atagresults.get(i).getFiducialId() == 24){
                 LLResultTypes.FiducialResult tag = Atagresults.get(i);
                 Pose3D camPose = tag.getRobotPoseFieldSpace();
@@ -346,7 +347,7 @@ public class PanTracking{
                 telemetry.addData("FidEstim Zpos", z);
             }
         }
-
+*/
 
 
 
@@ -365,7 +366,7 @@ public class PanTracking{
         pan.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pan.setPower(1);
         resetting = false;
-        limelight3A.start();
+       // limelight3A.start();
     }
 
     public static double turnAngle(double currentHeading, double targetAngle) {

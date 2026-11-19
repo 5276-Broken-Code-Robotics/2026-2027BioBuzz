@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-
+import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
@@ -35,7 +35,7 @@ public class blueBot extends  OpMode{
 
 
 
-       // PanTracking panTracking;
+        PanTracking panTracking;
         FieldRelativeDrive fieldDrive;
         ElapsedTime elapsedTime;
 
@@ -67,7 +67,10 @@ public class blueBot extends  OpMode{
         ElapsedTime rewindTimer;
 
         GoBildaPinpointDriver pinpoint;
-        DcMotor flywheel;
+        private Servo smallGate;
+        private Servo bigGate;
+        private DcMotor flywheelBig;
+        private DcMotor flywheelSmall;
 
 
         Limelight3A limelight;
@@ -107,12 +110,14 @@ public class blueBot extends  OpMode{
 
 
             intake = hardwareMap.get(DcMotor.class, "intake");
-
-            flywheel = hardwareMap.get(DcMotor.class, "bigFlywheel");
             //limelight = hardwareMap.get(Limelight3A.class,"limelight");
             pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
-
-
+            smallGate=hardwareMap.get(Servo.class, "smallGate");
+            smallGate=hardwareMap.get(Servo.class, "bigGate");
+            flywheelBig = hardwareMap.get(DcMotor.class, "smallFlywheel");
+            flywheelSmall = hardwareMap.get(DcMotor.class, "bigFlywheel");
+            flywheelBig.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            flywheelSmall.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED,
                     GoBildaPinpointDriver.EncoderDirection.REVERSED);
@@ -125,8 +130,6 @@ public class blueBot extends  OpMode{
 
             timer.reset();
             elapsedTime = new ElapsedTime();
-
-            flywheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             elapsedTime.reset();
 
 
@@ -142,7 +145,7 @@ public class blueBot extends  OpMode{
             intake.setPower(0);
 
             fieldDrive.init(hardwareMap, gamepad1, pinpoint);
-            //panTracking.init(hardwareMap,pinpoint,telemetry,limelight,false);
+            panTracking.init(hardwareMap,pinpoint,telemetry,false);
 
         }
 
@@ -180,10 +183,17 @@ public class blueBot extends  OpMode{
             if(gamepad1.dpadUpWasPressed()){
                 pinpoint.setHeading(0,AngleUnit.RADIANS);
             }
+            flywheelBig.setPower(.6);
+            flywheelSmall.setPower(.6);
 
 
-
-
+            if(gamepad1.right_trigger>.1) {
+                bigGate.setPosition(.5);
+                smallGate.setPosition(.5);
+            }else{
+                bigGate.setPosition(0);
+                smallGate.setPosition(0);
+            }
 
             if(gamepad2.y){
                 fl.setPower(0.0);
@@ -191,7 +201,7 @@ public class blueBot extends  OpMode{
                 br.setPower(0.0);
                 bl.setPower(0.0);
             }else{
-                fieldDrive.driveFieldRelative(gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x);
+                fieldDrive.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
                 //Shoundn't left stick y be negative and the other two be positive???? IDK ill ask abe today
                 // -Eli 11/19
 

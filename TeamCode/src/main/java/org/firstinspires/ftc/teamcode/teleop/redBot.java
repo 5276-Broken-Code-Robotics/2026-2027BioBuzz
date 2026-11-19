@@ -37,7 +37,10 @@ public class redBot extends  OpMode{
 
         private DcMotor br;
         private DcMotor bl;
-
+        private Servo smallGate;
+        private Servo bigGate;
+        private DcMotor flywheelBig;
+        private DcMotor flywheelSmall;
 
 
         PanTracking panTracking;
@@ -72,10 +75,10 @@ public class redBot extends  OpMode{
         ElapsedTime rewindTimer;
 
         GoBildaPinpointDriver pinpoint;
-        DcMotor flywheel;
 
 
-        Limelight3A limelight;
+
+        //Limelight3A limelight;
         boolean rewinding = false;
 
         //Pose2D startPose = new Pose2D(DistanceUnit.INCH,144 - 110, 70, AngleUnit.RADIANS,Math.toRadians(90)); // Lowest (Third Set) of Artifacts from the Spike Mark.
@@ -109,10 +112,11 @@ public class redBot extends  OpMode{
             fl = hardwareMap.get(DcMotor.class, "fl");
             bl = hardwareMap.get(DcMotor.class, "bl");
             br = hardwareMap.get(DcMotor.class, "br");
-
-
-            flywheel = hardwareMap.get(DcMotor.class, "bigFlywheel");
-            limelight = hardwareMap.get(Limelight3A.class,"limelight");
+            smallGate=hardwareMap.get(Servo.class, "smallGate");
+            smallGate=hardwareMap.get(Servo.class, "bigGate");
+            flywheelBig = hardwareMap.get(DcMotor.class, "smallFlywheel");
+            flywheelSmall = hardwareMap.get(DcMotor.class, "bigFlywheel");
+           // limelight = hardwareMap.get(Limelight3A.class,"limelight");
             pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
 
 
@@ -132,7 +136,8 @@ public class redBot extends  OpMode{
             timer.reset();
             elapsedTime = new ElapsedTime();
 
-            flywheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            flywheelBig.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            flywheelSmall.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             elapsedTime.reset();
 
 
@@ -148,7 +153,7 @@ public class redBot extends  OpMode{
             intake.setPower(0);
 
             fieldDrive.init(hardwareMap, gamepad1, pinpoint);
-            panTracking.init(hardwareMap,pinpoint,telemetry,limelight,true);
+            panTracking.init(hardwareMap,pinpoint,telemetry,true);
 
         }
 
@@ -187,9 +192,16 @@ public class redBot extends  OpMode{
                 pinpoint.setHeading(0,AngleUnit.RADIANS);
             }
 
+            flywheelBig.setPower(.6);
+            flywheelSmall.setPower(.6);
 
-
-
+            if(gamepad1.right_trigger>.1) {
+                bigGate.setPosition(.5);
+                smallGate.setPosition(.5);
+            }else{
+                bigGate.setPosition(0);
+                smallGate.setPosition(0);
+            }
 
             if(gamepad2.y){
                 fl.setPower(0.0);
