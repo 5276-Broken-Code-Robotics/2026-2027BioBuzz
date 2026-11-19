@@ -159,8 +159,7 @@ public class redBot extends  OpMode{
 
         @Override
         public void start(){
-
-
+     
             //CHANGE THIS
 
             //pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,144-96, 8.5, AngleUnit.RADIANS,Math.PI));
