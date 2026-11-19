@@ -78,7 +78,7 @@ public class redBot extends  OpMode{
         Limelight3A limelight;
         boolean rewinding = false;
 
-        Pose2D startPose = new Pose2D(DistanceUnit.INCH,144 - 110, 70, AngleUnit.RADIANS,Math.toRadians(90)); // Lowest (Third Set) of Artifacts from the Spike Mark.
+        //Pose2D startPose = new Pose2D(DistanceUnit.INCH,144 - 110, 70, AngleUnit.RADIANS,Math.toRadians(90)); // Lowest (Third Set) of Artifacts from the Spike Mark.
 
         int num = 0;
         public void init() {

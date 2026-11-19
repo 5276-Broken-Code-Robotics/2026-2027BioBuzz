@@ -1,31 +1,28 @@
 package org.firstinspires.ftc.teamcode.auto;
 
 
-import com.pedropathing.follower.Follower;
 import static com.pedropathing.api.Paths.line;
-import com.pedropathing.math.Pose;
-import com.pedropathing.paths.Path;
-import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
+import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Scheduler;
+import com.pedropathing.math.Pose;
+import com.pedropathing.paths.Path;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
-
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 
 @Autonomous(group = "Red Auto")
-public class redSlave extends OpMode {
+public class redSlaveBot extends OpMode {
 
     GoBildaPinpointDriver pinpoint;
 
@@ -37,8 +34,8 @@ public class redSlave extends OpMode {
     private ElapsedTime pathTimer, actionTimer, opmodeTimer, shotTimer;
     //private final Pose startPose = new Pose(80, 9, Math.toRadians(0));
     //private final Pose finalPose = new Pose(96, 9, Math.toRadians(0));
-    private final Pose startPose = new Pose(32, 132, Math.toRadians(0));
-    private final Pose finalPose = new Pose(32, 129, Math.toRadians(0));
+    private final Pose startPose = new Pose(32, 9, Math.toRadians(90));
+    private final Pose finalPose = new Pose(32, 12, Math.toRadians(90));
 
     private Path scorePreload;
 
@@ -82,7 +79,7 @@ public class redSlave extends OpMode {
                 //}else{
                   //  tweaking = true;
                 //}\
-                follower.(scorePreload);
+                schedule(follow(follower, scorePreload));
                 setPathState(-1);
                 break;
         }
@@ -102,12 +99,13 @@ public class redSlave extends OpMode {
                 GoBildaPinpointDriver.EncoderDirection.REVERSED);
         pinpoint.resetPosAndIMU();
 
-        pinpoint.setPosition( new Pose2D(DistanceUnit.INCH,80, 9,AngleUnit.RADIANS, Math.toRadians(0)));
+        pinpoint.setPosition( new Pose2D(DistanceUnit.INCH,32, 9,AngleUnit.RADIANS, Math.toRadians(90)));
 
         opmodeTimer.reset();
+        Scheduler.reset();
         follower = Constants.create(hardwareMap);
+        follower.setPose(startPose);
         buildPaths();
-        follower.setStartingPose(startPose);
 
         //shooter = new HoodedShooter();
 
@@ -137,6 +135,7 @@ public class redSlave extends OpMode {
 
 
         follower.update();
+        Scheduler.execute();
 
         //shooter.loop();
 
@@ -145,14 +144,14 @@ public class redSlave extends OpMode {
 
         autonomousPathUpdate();
 
-
+        Pose currentPose = follower.pose();
         if(tweaking)telemetry.addData("Hi", "Why are you tweaking lil bro");
 
         // Feedback to Driver Hub for debugging
         telemetry.addData("path state", pathState);
-        telemetry.addData("x", follower.getPose().getX());
-        telemetry.addData("y", follower.getPose().getY());
-        telemetry.addData("heading", follower.getPose().getHeading());
+        telemetry.addData("x", currentPose.x());
+        telemetry.addData("y", currentPose.y());
+        telemetry.addData("heading", currentPose.heading());
         telemetry.addData("Timer :", opmodeTimer.seconds());
         telemetry.update();
     }
@@ -161,12 +160,12 @@ public class redSlave extends OpMode {
         opmodeTimer.reset();
         intake.setPower(1);
 
-        follower.setStartingPose(startPose);
+        follower.setPose(startPose);
 
         //shooter.start();
 
 
-        Pose2D startpos = new Pose2D(DistanceUnit.INCH, 80,9,AngleUnit.RADIANS,0);
+        Pose2D startpos = new Pose2D(DistanceUnit.INCH, 32,132,AngleUnit.RADIANS,0);
         pinpoint.setPosition(startpos);
 
         setPathState(0);
