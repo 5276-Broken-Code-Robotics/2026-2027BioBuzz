@@ -182,37 +182,6 @@ public class PanTracking{
 
 
 
-
-        if(Math.abs(angleToAprilTag) * 180 / PI < 30 || pinpoint.getPosY(DistanceUnit.INCH) <= 48){
-
-            //localization : Seeing where you are on the field
-            telemetry.addData("Using Limelight Data : ",  "Now");
-
-            boolean foundOne = false;
-            LLResultTypes.FiducialResult fidRes = null;
-            for(int i =0; i < results.size(); i++){
-                if(results.get(i).getFiducialId() == id ){
-                    foundOne = true;
-                    fidRes = results.get(i);
-                }
-            }
-
-
-
-            telemetry.addData("Found One :", foundOne);
-
-            if(foundOne){
-
-                double valCalced = pan.getCurrentPosition() + fidRes.getTargetXDegrees()* (panMax-panZero) / 180;
-                if(Math.abs(valCalced- targetTicks) > 5){
-                    targetTicks = valCalced;
-                }
-            }
-        }
-
-
-
-
         if(autoPausingTimer.seconds() < 1 && autoPausing){
             if(id == 24){
                 targetTicks = panZero;

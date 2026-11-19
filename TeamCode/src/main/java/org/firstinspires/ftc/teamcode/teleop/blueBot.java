@@ -81,7 +81,7 @@ public class blueBot extends  OpMode{
         int num = 0;
         public void init() {
 
-            //panTracking = new PanTracking();
+            panTracking = new PanTracking();
 
             rewindTimer = new ElapsedTime();
             rewindTimer.reset();
@@ -113,9 +113,9 @@ public class blueBot extends  OpMode{
             //limelight = hardwareMap.get(Limelight3A.class,"limelight");
             pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
             smallGate=hardwareMap.get(Servo.class, "smallGate");
-            smallGate=hardwareMap.get(Servo.class, "bigGate");
-            flywheelBig = hardwareMap.get(DcMotor.class, "smallFlywheel");
-            flywheelSmall = hardwareMap.get(DcMotor.class, "bigFlywheel");
+            bigGate=hardwareMap.get(Servo.class, "bigGate");
+            flywheelSmall = hardwareMap.get(DcMotor.class, "smallFlywheel");
+            flywheelBig = hardwareMap.get(DcMotor.class, "bigFlywheel");
             flywheelBig.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             flywheelSmall.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -156,7 +156,7 @@ public class blueBot extends  OpMode{
             //CHANGE THIS
 //this needs to be changed because this is temperary for only blue bot side
             pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,109, 12, AngleUnit.RADIANS,Math.toRadians(270)));
-
+            panTracking.start();
             intake.setPower(1);
 
 
@@ -171,7 +171,7 @@ public class blueBot extends  OpMode{
         public void loop(){
 
 
-
+            panTracking.loop();
             if(gamepad2.a){
                 //rewindTimer.reset();
                 if(intake.getPower() == 1 )intake.setPower(-1);
@@ -204,6 +204,7 @@ public class blueBot extends  OpMode{
                 fieldDrive.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
                 //Shoundn't left stick y be negative and the other two be positive???? IDK ill ask abe today
                 // -Eli 11/19
+
 
                 if(gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0)fieldDrive.driveFieldRelative( -gamepad2.left_stick_y/4,   gamepad2.left_stick_x/4,  gamepad2.right_stick_x/4);
 
