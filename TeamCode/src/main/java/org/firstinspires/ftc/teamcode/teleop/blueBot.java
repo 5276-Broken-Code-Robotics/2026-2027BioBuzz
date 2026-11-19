@@ -120,9 +120,6 @@ public class blueBot extends  OpMode{
 
 
 
-
-            intake = hardwareMap.get(DcMotor.class, "intake");
-
             //intake.setDirection(DcMotor.Direction.REVERSE);
 
 
