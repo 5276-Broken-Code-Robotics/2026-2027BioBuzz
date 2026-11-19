@@ -192,6 +192,9 @@ public class blueBot extends  OpMode{
                 bl.setPower(0.0);
             }else{
                 fieldDrive.driveFieldRelative(gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x);
+                //Shoundn't left stick y be negative and the other two be positive???? IDK ill ask abe today
+                // -Eli 11/19
+
                 if(gamepad1.left_stick_y == 0 && gamepad1.left_stick_x == 0 && gamepad1.right_stick_x == 0)fieldDrive.driveFieldRelative( -gamepad2.left_stick_y/4,   gamepad2.left_stick_x/4,  gamepad2.right_stick_x/4);
 
             }
