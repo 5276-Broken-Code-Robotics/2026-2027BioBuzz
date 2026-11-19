@@ -108,7 +108,7 @@ public class blueBot extends  OpMode{
 
             intake = hardwareMap.get(DcMotor.class, "intake");
 
-            flywheel = hardwareMap.get(DcMotor.class, "flywheel");
+            flywheel = hardwareMap.get(DcMotor.class, "bigFlywheel");
             limelight = hardwareMap.get(Limelight3A.class,"limelight");
             pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
 

@@ -111,9 +111,7 @@ public class redBot extends  OpMode{
             br = hardwareMap.get(DcMotor.class, "br");
 
 
-            intake = hardwareMap.get(DcMotor.class, "intake");
-
-            flywheel = hardwareMap.get(DcMotor.class, "flywheel");
+            flywheel = hardwareMap.get(DcMotor.class, "bigFlywheel");
             limelight = hardwareMap.get(Limelight3A.class,"limelight");
             pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
 
