@@ -34,8 +34,8 @@ public class blueSlaveTop extends OpMode {
     private ElapsedTime pathTimer, actionTimer, opmodeTimer, shotTimer;
     //private final Pose startPose = new Pose(80, 9, Math.toRadians(0));
     //private final Pose finalPose = new Pose(96, 9, Math.toRadians(0));
-    private final Pose startPose = new Pose(104, 132, Math.toRadians(90));
-    private final Pose finalPose = new Pose(104, 129, Math.toRadians(90));
+    private final Pose startPose = new Pose(104, 132, Math.toRadians(270));
+    private final Pose finalPose = new Pose(104, 129, Math.toRadians(270));
 
     private Path scorePreload;
 
@@ -99,7 +99,7 @@ public class blueSlaveTop extends OpMode {
                 GoBildaPinpointDriver.EncoderDirection.REVERSED);
         pinpoint.resetPosAndIMU();
 
-        pinpoint.setPosition( new Pose2D(DistanceUnit.INCH,104, 132,AngleUnit.RADIANS, Math.toRadians(90)));
+        pinpoint.setPosition( new Pose2D(DistanceUnit.INCH,104, 132,AngleUnit.RADIANS, Math.toRadians(270)));
 
         opmodeTimer.reset();
         Scheduler.reset();
