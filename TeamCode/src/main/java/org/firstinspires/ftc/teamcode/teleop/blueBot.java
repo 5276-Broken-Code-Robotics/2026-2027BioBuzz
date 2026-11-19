@@ -35,7 +35,7 @@ public class blueBot extends  OpMode{
 
 
 
-        PanTracking panTracking;
+       // PanTracking panTracking;
         FieldRelativeDrive fieldDrive;
         ElapsedTime elapsedTime;
 
@@ -78,7 +78,7 @@ public class blueBot extends  OpMode{
         int num = 0;
         public void init() {
 
-            panTracking = new PanTracking();
+            //panTracking = new PanTracking();
 
             rewindTimer = new ElapsedTime();
             rewindTimer.reset();
@@ -109,7 +109,7 @@ public class blueBot extends  OpMode{
             intake = hardwareMap.get(DcMotor.class, "intake");
 
             flywheel = hardwareMap.get(DcMotor.class, "bigFlywheel");
-            limelight = hardwareMap.get(Limelight3A.class,"limelight");
+            //limelight = hardwareMap.get(Limelight3A.class,"limelight");
             pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
 
 
@@ -142,7 +142,7 @@ public class blueBot extends  OpMode{
             intake.setPower(0);
 
             fieldDrive.init(hardwareMap, gamepad1, pinpoint);
-            panTracking.init(hardwareMap,pinpoint,telemetry,limelight,false);
+            //panTracking.init(hardwareMap,pinpoint,telemetry,limelight,false);
 
         }
 
@@ -151,8 +151,8 @@ public class blueBot extends  OpMode{
 
 
             //CHANGE THIS
-
-            //pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,144-96, 8.5, AngleUnit.RADIANS,Math.PI));
+//this needs to be changed because this is temperary for only blue bot side
+            pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,109, 12, AngleUnit.RADIANS,Math.toRadians(270)));
 
             intake.setPower(1);
 
