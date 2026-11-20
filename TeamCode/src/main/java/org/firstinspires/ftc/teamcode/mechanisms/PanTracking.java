@@ -230,11 +230,21 @@ public class PanTracking{
         if(Math.abs(lastOrientedPos - targetTicks) > 1 && Math.abs(angleToAprilTag) <= PI + 1 && spinCD.seconds() > 0.2){
 
             spinCD.reset();
+            /*
             if(targetTicks > panMax * 2){
                 targetTicks = panMax * 2;
             }
             if(targetTicks < panZero * 2){
                 targetTicks = panZero * 2;
+            }
+
+             */
+
+            if(targetTicks > panMax ){
+                targetTicks = panMax;
+            }
+            if(targetTicks < panZero){
+                targetTicks = panZero;
             }
 
             pan.setTargetPosition((int) targetTicks);
@@ -245,36 +255,6 @@ public class PanTracking{
 
         telemetry.addData("Target Ticks", targetTicks);
 
-        /*
-        List<LLResultTypes.FiducialResult> Atagresults;
-
-        if(limelight3A.getLatestResult() != null){
-            Atagresults = limelight3A.getLatestResult().getFiducialResults();
-        }else{
-            Atagresults = new ArrayList<>();
-        }
-
-
-        telemetry.addData("ATAG Results size :", Atagresults.size());
-        for(int i =0; i < Atagresults.size();i++){
-            if(Atagresults.get(i).getFiducialId() == 24){
-                LLResultTypes.FiducialResult tag = Atagresults.get(i);
-                Pose3D camPose = tag.getRobotPoseTargetSpace();
-
-                double x = tag.getRobotPoseFieldSpace().getPosition().x;
-                double y = tag.getRobotPoseFieldSpace().getPosition().y;
-                double z = tag.getRobotPoseFieldSpace().getPosition().z;
-
-                telemetry.addData("Tag ID", tag.getFiducialId());
-                telemetry.addData("FidEstim Xpos", x);
-                telemetry.addData("FidEstim Ypos", y );
-                telemetry.addData("FidEstim Zpos", z);
-            }
-
-
-        }
-
-    */
 
 
 
@@ -299,24 +279,8 @@ public class PanTracking{
 
 
 
-        //List<LLResultTypes.FiducialResult> Atagresults = limelight3A.getLatestResult().getFiducialResults();
 
-        /*for(int i =0; i < Atagresults.size();i++){
-            if(Atagresults.get(i).getFiducialId() == 24){
-                LLResultTypes.FiducialResult tag = Atagresults.get(i);
-                Pose3D camPose = tag.getRobotPoseFieldSpace();
 
-                double x = tag.getRobotPoseFieldSpace().getPosition().x;
-                double y = tag.getRobotPoseFieldSpace().getPosition().y;
-                double z = tag.getRobotPoseFieldSpace().getPosition().z;
-
-                telemetry.addData("Tag ID", tag.getFiducialId());
-                telemetry.addData("FidEstim Xpos", x);
-                telemetry.addData("FidEstim Ypos", y );
-                telemetry.addData("FidEstim Zpos", z);
-            }
-        }
-*/
 
 
 
