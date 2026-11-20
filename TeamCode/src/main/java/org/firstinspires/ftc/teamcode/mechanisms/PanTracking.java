@@ -28,7 +28,6 @@ import java.util.List;
 
 public class PanTracking{
 
-    public ElapsedTime autoPausingTimer;
 
 
 
@@ -38,7 +37,6 @@ public class PanTracking{
     public boolean isFar = false;
 
     public boolean isClose = false;
-    public boolean autoPausing = false;
     public DcMotor pan;
     double tAngle;
     float lastOrientedPos;
@@ -88,9 +86,7 @@ public class PanTracking{
         //this.limelight3A = limelight3A;
 
         this.isRed = isRed;
-        autoPausing = false;
 
-        autoPausingTimer = new ElapsedTime();
         spinCD = new ElapsedTime();
 
         spinCD.reset();
@@ -176,41 +172,13 @@ public class PanTracking{
         }
 
 
-        double targetTicks = -   tAngle* (panMax-panZero)/(Math.PI);
+        double targetTicks = -   tAngle* Math.abs((panMax-panZero))/(Math.PI);
 
 
 
 
 
-        if(autoPausingTimer.seconds() < 1 && autoPausing){
-            if(id == 24){
-                targetTicks = panZero;
-            }
-            if(id == 20){
-                targetTicks = panMax;
-            }
-        }else if (autoPausing){
-            boolean foundOne = false;
-            LLResultTypes.FiducialResult fidRes = null;
-            for(int i =0; i < results.size(); i++){
-                if(results.get(i).getFiducialId() == id ){
-                    foundOne = true;
-                    fidRes = results.get(i);
-                }
-            }
 
-
-
-            telemetry.addData("Found One :", foundOne);
-
-            if(foundOne){
-
-                double valCalced = pan.getCurrentPosition() + fidRes.getTargetXDegrees()* (panMax-panZero) / 180;
-                if(Math.abs(valCalced- targetTicks) > 5){
-                    targetTicks = valCalced;
-                }
-            }
-        }
 
 
 
@@ -219,48 +187,31 @@ public class PanTracking{
         }
 
 
+        telemetry.addData("Target Ticks : ", targetTicks);
 
 
 
 
 
-        telemetry.addData("Here Lies the Three Conditionals", " That aren't working");
-
-        telemetry.addData("Math.abs(lastOrientedPos - targetTicks) > 1 ", Math.abs(lastOrientedPos - targetTicks) > 1 );
-        telemetry.addData(" Math.abs(angleToAprilTag) <= PI ",  Math.abs(angleToAprilTag) <= PI );
-        telemetry.addData(" spinCD.seconds() > 0.2",  spinCD.seconds() > 0.2);
-
-        telemetry.addData("Potential Errors : ", "Here");
-
-        telemetry.addData("Last oriented pos ", lastOrientedPos);
-        telemetry.addData(" Math.abs(angleToAprilTag)",  Math.abs(angleToAprilTag));
-        telemetry.addData(" spinCD.seconds()",  spinCD.seconds() );
 
 
-        if(Math.abs(lastOrientedPos - targetTicks) > 1 && Math.abs(angleToAprilTag) <= PI && spinCD.seconds() > 0.2){
+        if(Math.abs(lastOrientedPos - targetTicks) > 1 && (spinCD.seconds() > 0.2 )){
 
-            telemetry.addData("The if statement that should always be working is working", "Hooray");
             spinCD.reset();
-            /*
-            if(targetTicks > panMax * 2){
-                targetTicks = panMax * 2;
-            }
-            if(targetTicks < panZero * 2){
-                targetTicks = panZero * 2;
-            }
-
-            */
 
 
-
-            if(targetTicks > panMax ){
+            // MAKE SURE TO KEEP PROPER SIGNS
+            if(targetTicks < panMax ){
                 targetTicks = panMax;
             }
-            if(targetTicks < panZero){
+
+
+            if(targetTicks > panZero){
                 targetTicks = panZero;
             }
 
 
+            if(targetTicks > panMax || targetTicks < panZero) telemetry.addData("Capped", "Right now");
 
 
             pan.setTargetPosition((int) targetTicks);
