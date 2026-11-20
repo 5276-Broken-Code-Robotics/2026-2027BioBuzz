@@ -99,7 +99,7 @@ public class redSlaveBot extends OpMode {
                 GoBildaPinpointDriver.EncoderDirection.REVERSED);
         pinpoint.resetPosAndIMU();
 
-        pinpoint.setPosition( new Pose2D(DistanceUnit.INCH,32, 9,AngleUnit.RADIANS, Math.toRadians(90)));
+        pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,32, 9,AngleUnit.RADIANS, Math.toRadians(90)));
 
         opmodeTimer.reset();
         Scheduler.reset();
@@ -165,8 +165,8 @@ public class redSlaveBot extends OpMode {
         //shooter.start();
 
 
-        Pose2D startpos = new Pose2D(DistanceUnit.INCH, 32,132,AngleUnit.RADIANS,0);
-        pinpoint.setPosition(startpos);
+
+
 
         setPathState(0);
     }
