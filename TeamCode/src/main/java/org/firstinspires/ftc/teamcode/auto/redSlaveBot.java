@@ -35,7 +35,7 @@ public class redSlaveBot extends OpMode {
     //private final Pose startPose = new Pose(80, 9, Math.toRadians(0));
     //private final Pose finalPose = new Pose(96, 9, Math.toRadians(0));
     private final Pose startPose = new Pose(32, 9, Math.toRadians(90));
-    private final Pose finalPose = new Pose(32, 12, Math.toRadians(90));
+    private final Pose finalPose = new Pose(32, 9, Math.toRadians(90));
 
     private Path scorePreload;
 
@@ -62,7 +62,7 @@ public class redSlaveBot extends OpMode {
                 opmodeTimer.reset();
 
 
-                //setPathState(1);
+                setPathState(1);
                 break;
             case 100:
                 //if(shooter.panTracking.autoPausingTimer.seconds() > 2){
