@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 @Autonomous(group = "Red Auto")
 public class redSlaveBot extends OpMode {
 
-    GoBildaPinpointDriver pinpoint;
+    //GoBildaPinpointDriver pinpoint;
 
     public int pathState;
 
@@ -41,7 +41,7 @@ public class redSlaveBot extends OpMode {
 
 
     public void buildPaths(){
-        scorePreload =line(startPose, finalPose).linear(startPose, finalPose);
+        scorePreload =line(startPose, finalPose).linear(startPose,finalPose);
     }
     public void stop(){
         //shooter.panTracking.pan.setTargetPosition(0);
@@ -94,12 +94,12 @@ public class redSlaveBot extends OpMode {
 
 
 
-        pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
-        pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED,
-                GoBildaPinpointDriver.EncoderDirection.REVERSED);
-        pinpoint.resetPosAndIMU();
+        //pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
+        // pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED,
+        //       GoBildaPinpointDriver.EncoderDirection.FORWARD);
+       // pinpoint.resetPosAndIMU();
 
-        pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,32, 9,AngleUnit.RADIANS, Math.toRadians(90)));
+       // pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,32, 9,AngleUnit.RADIANS, Math.toRadians(90)));
 
         opmodeTimer.reset();
         Scheduler.reset();
@@ -115,10 +115,7 @@ public class redSlaveBot extends OpMode {
         intake = hardwareMap.get(DcMotor.class, "intake");
         intake.setDirection(DcMotor.Direction.FORWARD);
 
-        DcMotor fl = hardwareMap.get(DcMotor.class, "fl");
-        DcMotor fr = hardwareMap.get(DcMotor.class, "fr");
-        DcMotor bl = hardwareMap.get(DcMotor.class, "bl");
-        DcMotor br = hardwareMap.get(DcMotor.class, "br");
+
 
         //shooter.init(hardwareMap, telemetry, pinpoint, 24);
 
@@ -140,7 +137,7 @@ public class redSlaveBot extends OpMode {
         //shooter.loop();
 
 
-
+        //pinpoint.update();
 
         autonomousPathUpdate();
 
