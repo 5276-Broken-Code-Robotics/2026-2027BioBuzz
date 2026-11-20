@@ -177,7 +177,7 @@ public class blueBot extends  OpMode{
 
 
             panTracking.loop();
-            if(gamepad2.a){
+            if(gamepad1.a){
                 //rewindTimer.reset();
                 if(intake.getPower() == 1 )intake.setPower(-1);
                 //rewinding = true;
