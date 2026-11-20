@@ -62,7 +62,7 @@ public class redSlaveBot extends OpMode {
                 opmodeTimer.reset();
 
 
-                setPathState(1);
+                //setPathState(1);
                 break;
             case 100:
                 //if(shooter.panTracking.autoPausingTimer.seconds() > 2){
