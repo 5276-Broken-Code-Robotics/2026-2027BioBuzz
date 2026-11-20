@@ -154,7 +154,7 @@ public class blueBot extends  OpMode{
 
 
             //CHANGE THIS
-//this needs to be changed because this is temperary for only blue bot side
+//this needs to be changed because this is temporary for only blue bot side
             pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,109, 12, AngleUnit.RADIANS,Math.toRadians(270)));
             panTracking.start();
             intake.setPower(1);
