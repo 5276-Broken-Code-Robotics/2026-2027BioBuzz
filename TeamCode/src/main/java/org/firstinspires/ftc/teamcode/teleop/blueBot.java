@@ -5,6 +5,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import com.qualcomm.robotcore.hardware.Servo;
@@ -119,6 +120,10 @@ public class blueBot extends  OpMode{
             flywheelBig.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             flywheelSmall.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+            flywheelSmall.setDirection(DcMotorSimple.Direction.REVERSE);
+
+            flywheelBig.setDirection(DcMotorSimple.Direction.REVERSE);
+
             pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED,
                     GoBildaPinpointDriver.EncoderDirection.REVERSED);
             //pinpoint.resetPosAndIMU();
@@ -225,8 +230,6 @@ public class blueBot extends  OpMode{
             telemetry.addData("Coordinates: ", pinpoint.getPosX(DistanceUnit.INCH) + " " + pinpoint.getPosY(DistanceUnit.INCH) + " At an angle of " +pinpoint.getHeading(AngleUnit.RADIANS));
             //telemetry.update();
 
-
-            telemetry.addData("Angle of Field driver :" , fieldDrive.AngleFacing);
             telemetry.update();
         }
 

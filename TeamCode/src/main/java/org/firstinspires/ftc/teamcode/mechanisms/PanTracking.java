@@ -51,11 +51,11 @@ public class PanTracking{
     Pose2D redTop = new Pose2D(DistanceUnit.INCH,57.378,92.894,AngleUnit.RADIANS,0);
     Pose2D blueBot = new Pose2D(DistanceUnit.INCH,86.622,51.106,AngleUnit.RADIANS,0);
     Pose2D blueTop = new Pose2D(DistanceUnit.INCH,86.622,92.894,AngleUnit.RADIANS,0);
-    float panZero = -410;
+    float panZero = 340;
 
     float panForward = 0;
 
-    float panMax = 410;
+    float panMax = -340;
 
     boolean resetting = false;
     GoBildaPinpointDriver pinpoint;
@@ -224,11 +224,22 @@ public class PanTracking{
 
 
 
+        telemetry.addData("Here Lies the Three Conditionals", " That aren't working");
+
+        telemetry.addData("Math.abs(lastOrientedPos - targetTicks) > 1 ", Math.abs(lastOrientedPos - targetTicks) > 1 );
+        telemetry.addData(" Math.abs(angleToAprilTag) <= PI ",  Math.abs(angleToAprilTag) <= PI );
+        telemetry.addData(" spinCD.seconds() > 0.2",  spinCD.seconds() > 0.2);
+
+        telemetry.addData("Potential Errors : ", "Here");
+
+        telemetry.addData("Last oriented pos ", lastOrientedPos);
+        telemetry.addData(" Math.abs(angleToAprilTag)",  Math.abs(angleToAprilTag));
+        telemetry.addData(" spinCD.seconds()",  spinCD.seconds() );
 
 
+        if(Math.abs(lastOrientedPos - targetTicks) > 1 && Math.abs(angleToAprilTag) <= PI && spinCD.seconds() > 0.2){
 
-        if(Math.abs(lastOrientedPos - targetTicks) > 1 && Math.abs(angleToAprilTag) <= PI + 1 && spinCD.seconds() > 0.2){
-
+            telemetry.addData("The if statement that should always be working is working", "Hooray");
             spinCD.reset();
             /*
             if(targetTicks > panMax * 2){
@@ -238,7 +249,9 @@ public class PanTracking{
                 targetTicks = panZero * 2;
             }
 
-             */
+            */
+
+
 
             if(targetTicks > panMax ){
                 targetTicks = panMax;
@@ -247,9 +260,14 @@ public class PanTracking{
                 targetTicks = panZero;
             }
 
+
+
+
             pan.setTargetPosition((int) targetTicks);
             lastOrientedPos = (int)targetTicks;
         }
+
+
 
 
 
@@ -271,21 +289,6 @@ public class PanTracking{
 
         telemetry.addData("Pos X :", pinpoint.getPosX(DistanceUnit.INCH));
         telemetry.addData("Pos Y :", pinpoint.getPosY(DistanceUnit.INCH));
-
-
-
-
-
-
-
-
-
-
-
-
-
-        telemetry.addData("According to pantracking we are at : ", pinpoint.getPosX(DistanceUnit.INCH) + " " + pinpoint.getPosY(DistanceUnit.INCH) + " At an angle of " +pinpoint.getHeading(AngleUnit.RADIANS));
-
 
 
 

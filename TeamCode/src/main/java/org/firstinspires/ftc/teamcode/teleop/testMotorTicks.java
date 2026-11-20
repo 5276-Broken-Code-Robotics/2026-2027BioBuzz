@@ -36,9 +36,9 @@ public class testMotorTicks extends OpMode{
 
     @Override
     public void start(){
-
-
         pan.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        pan.setTargetPosition(0);
 
         pan.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pan.setPower(1);
