@@ -188,16 +188,16 @@ public class redBot extends  OpMode{
         if(gamepad1.dpadUpWasPressed()){
             pinpoint.setHeading(0,AngleUnit.RADIANS);
         }
-        flywheelBig.setPower(.6);
-        flywheelSmall.setPower(.6);
+        flywheelBig.setPower(.8);
+        flywheelSmall.setPower(.8);
 
 
         if(gamepad1.right_trigger>.1) {
             bigGate.setPosition(.5);
             smallGate.setPosition(.5);
         }else{
-            bigGate.setPosition(0);
-            smallGate.setPosition(0);
+            bigGate.setPosition(.16);
+            smallGate.setPosition(.16);
         }
 
         if(gamepad2.y){
@@ -206,7 +206,7 @@ public class redBot extends  OpMode{
             br.setPower(0.0);
             bl.setPower(0.0);
         }else{
-            fieldDrive.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+            fieldDrive.driveFieldRelative(gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x);
             //Shoundn't left stick y be negative and the other two be positive???? IDK ill ask abe today
             // -Eli 11/19
 
